@@ -18,6 +18,6 @@ namespace BlogFall.Models
         [Display(Name = "Kategori Adı")]
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Post> Post { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

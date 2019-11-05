@@ -19,7 +19,7 @@ namespace BlogFall.Models
 
         [Required]
         [Display(Name = "Kategori")]
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         [StringLength(200)]
