@@ -34,6 +34,7 @@ namespace BlogFall.Areas.Admin.Controllers
 
             
         }
+
         public ActionResult Edit(int id)
         {
             ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "CategoryName");

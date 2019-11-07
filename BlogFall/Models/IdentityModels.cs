@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
@@ -19,6 +20,8 @@ namespace BlogFall.Models
             return userIdentity;
         }
 
+        [StringLength(100)]
+        public string Photo { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
     }
 

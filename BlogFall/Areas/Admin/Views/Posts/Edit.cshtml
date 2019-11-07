@@ -5,7 +5,7 @@
     ViewBag.HeaderTitle = "Yazıyı düzenle";
 }
 
-@using (Html.BeginForm("", "", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => x.Id)
