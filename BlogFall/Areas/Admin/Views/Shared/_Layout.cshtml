@@ -22,6 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/Areas/Admin/dist/css/adminlte.min.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/Areas/Admin/plugins/summernote/summernote-bs4.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="~/Areas/Admin/plugins/toastr/toastr.min.css">
     <script src="~/Areas/Admin/plugins/summernote/lang/summernote-tr-TR.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -187,18 +189,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Yönetim
+                                    Yazılar
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New", "Posts")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yeni Yazı</p>
+                                    </a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a href="@Url.Action("Index", "Posts")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Yazılar</p>
+                                        <p>Yazıları Listele</p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Kategoriler
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("New", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Yeni Kategori</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Categories")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kategorileri Listele</p>
+                                    </a>
+                                </li>
+
+
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -234,7 +268,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                                 <li class="breadcrumb-item">
-                                    <a href="@Url.Action("Index", Html.ControllerName())">@Html.ControllerName()</a>
+                                    <a href="@Url.Action("Index", Html.ControllerName())">@Html.BreadCrumbControllerName()</a>
                                 </li>
                                 <li class="breadcrumb-item active">@Html.ActionName()</li>
                             </ol>
@@ -282,6 +316,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="~/Areas/Admin/dist/js/adminlte.min.js"></script>
     <!-- Summernote -->
     <script src="~/Areas/Admin/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- Toastr -->
+    <script src="~/Areas/Admin/plugins/toastr/toastr.min.js"></script>
     @RenderSection("scripts", false)
 </body>
 </html>
