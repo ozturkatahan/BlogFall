@@ -36,9 +36,9 @@ namespace BlogFall.Controllers
             ViewBag.prevPage = page - 1 < 2 ? 1 : page - 1;
             ViewBag.cid = cid;
 
-            return View(result            
+            return View(result
                 .OrderByDescending(x => x.CreationTime)
-                 .Skip((page - 1)* pageSize)
+                 .Skip((page - 1) * pageSize)
                  .Take(pageSize)
                  .ToList());
         }
@@ -60,6 +60,18 @@ namespace BlogFall.Controllers
         public ActionResult CategoriesPartial()
         {
             return PartialView("_CategoriesPartial", db.Categories.ToList());
+        }
+
+        public ActionResult ShowPost(int id)
+        {
+            Post post = db.Posts.Find(id);
+
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(post);
         }
     }
 }

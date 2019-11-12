@@ -55,5 +55,28 @@ namespace BlogFall.Helpers
 
             return ba.Name;
         }
+        public static IHtmlString ShowPostIntro(this HtmlHelper htmlHelper, string content)
+        {
+            int pos = content.IndexOf("<hr>");
+
+            if (pos == -1)
+            {
+                return htmlHelper.Raw(content);
+            }
+
+            return htmlHelper.Raw(content.Substring(0, pos));
+        }
+
+        public static IHtmlString ShowPost(this HtmlHelper htmlHelper, string content)
+        {
+            int pos = content.IndexOf("<hr>");
+
+            if (pos == -1)
+            {
+                return htmlHelper.Raw(content);
+            }
+
+            return htmlHelper.Raw(content.Remove(pos, 4));
+        }
     }
 }
