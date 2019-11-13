@@ -1,8 +1,8 @@
 ﻿using BlogFall.Models;
+using BlogFall.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BlogFall.Controllers
@@ -72,6 +72,35 @@ namespace BlogFall.Controllers
             }
 
             return View(post);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult SendComment(SendCommentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Comment comment = new Comment
+                {
+                    AuthorId = User.Identity.GetUserId(),
+                    AuthorName = model.AuthorName,
+                    AuthorEmail = model.AuthorEmail,
+                    Content = model.Content,
+                    CreationTime = DateTime.Now,
+                    ParentId = model.ParentId,
+                    PostId = model.PostId
+                };
+
+                db.Comments.Add(comment);
+                db.SaveChanges();
+
+                return Json(comment);
+            }
+
+            var errorList = ModelState.Values.SelectMany(m => m.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+
+            return Json(new { Errors = errorList });
         }
     }
 }
