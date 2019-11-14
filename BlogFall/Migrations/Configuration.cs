@@ -18,6 +18,14 @@ namespace BlogFall.Migrations
 
         protected override void Seed(BlogFall.Models.ApplicationDbContext context)
         {
+            
+            ////tüm kullanýcýlarý aktif yapar
+            //foreach (var item in context.Users)
+            //{
+            //    item.IsEnabled = true;
+            //}
+            //return;
+
             #region Admin Rolünü ve Kullanýcýsýný Oluþtur
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -32,7 +40,11 @@ namespace BlogFall.Migrations
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "ozturkatahan5@gmail.com", Email = "ozturkatahan5@gmail.com" };
+                var user = new ApplicationUser
+                {
+                    UserName = "ozturkatahan5@gmail.com",
+                    Email = "ozturkatahan5@gmail.com"
+                };
 
                 manager.Create(user, "Atahan1.");
                 manager.AddToRole(user.Id, "Admin");

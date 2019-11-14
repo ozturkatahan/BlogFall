@@ -1,4 +1,5 @@
-﻿using BlogFall.Attributes;
+﻿using BlogFall.Areas.Admin.ViewModels;
+using BlogFall.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,14 @@ namespace BlogFall.Areas.Admin.Controllers
         [BreadCrumb("İndeks")]
         public ActionResult Index()
         {
-            return View();
+            var model = new DashboardIndexViewModel
+            {
+                CategoryCount = db.Categories.Count(),
+                PostCount = db.Posts.Count(),
+                UserCount = db.Users.Count(),
+                CommentCount = db.Comments.Count(),
+            };
+            return View(model);
         }
     }
 }
