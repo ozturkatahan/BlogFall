@@ -1,6 +1,7 @@
 namespace BlogFall.Migrations
 {
     using BlogFall.Models;
+    using BlogFall.Utility;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
@@ -18,7 +19,9 @@ namespace BlogFall.Migrations
 
         protected override void Seed(BlogFall.Models.ApplicationDbContext context)
         {
-            
+            var autoGenerateSlugs = false;
+            var autoGeneretaSlugsAll = false;
+
             ////tüm kullanýcýlarý aktif yapar
             //foreach (var item in context.Users)
             //{
@@ -142,10 +145,33 @@ namespace BlogFall.Migrations
                         }
 
                         context.Categories.Add(diger);
-                     
+
 
                     }
                 }
+            }
+            #endregion
+
+            #region Mevcut kategori ve yazýlarýn slug'larýný oluþtur
+            if (autoGenerateSlugs)
+            {
+
+                foreach (var item in context.Categories)
+                {
+                    if (autoGeneretaSlugsAll || string.IsNullOrEmpty(item.Slug))
+                    {
+                        item.Slug = UrlService.URLFriendly(item.CategoryName);
+                    }
+                }
+
+                foreach (var item in context.Posts)
+                {
+                    if (autoGeneretaSlugsAll || string.IsNullOrEmpty(item.Slug))
+                    {
+                        item.Slug = UrlService.URLFriendly(item.Title);
+                    }
+                }
+             
             }
             #endregion
 

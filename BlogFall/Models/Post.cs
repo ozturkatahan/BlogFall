@@ -26,6 +26,10 @@ namespace BlogFall.Models
         [Display(Name = "Başlık")]
         public string Title { get; set; }
 
+        [StringLength(200)]
+        [Display(Name = "Url")]
+        public string Slug { get; set; }
+
         [Display(Name = "İçerik")]
         public string Content { get; set; }
 

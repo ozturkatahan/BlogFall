@@ -41,6 +41,14 @@
                 @Html.ValidationMessageFor(x => x.Content, null,
                new { @class = "text-danger"})
             </div>
+
+            <div class="form-inline">
+                @Html.LabelFor(x => x.Slug)
+                @Html.TextBoxFor(x => x.Slug, new { @class = "form-control ml-2 col-4"})
+                @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
+                <a href="#", class=" ml-2 text-secondary" id="btnRegenerateSlug"><i class="fas fa-sync"></i></a>
+            </div>
+
             @*<div class="form-group">
                     <div class="btn btn-default btn-file">
                         <i class="fas fa-paperclip"></i> Attachment
@@ -67,6 +75,30 @@
 @section scripts {
     <script>
         $(function () {
+            function GenerateSlug() {
+                $.ajax({
+                        type: "post",
+                        url: "@Url.Action("GenerateSlug", "Posts")",
+                        data: { Title: $("#Title").val().trim() },
+                        success: function (result) {
+                            $("#Slug").val(result);
+                        }
+                    });
+            }
+
+            $("#btnRegenerateSlug").click(function (event) {
+                event.preventDefault();
+                if ($("#Title").val().trim()) {
+                    GenerateSlug();
+                }
+            })
+
+            $("#Title").on("blur", function () {
+                if ($(this).val().trim && !$("#Slug").val().trim()) {
+                    GenerateSlug();
+                }
+            });
+
             //Add text editor
             $('#Content').summernote({
                 toolbar: [
@@ -88,7 +120,7 @@
                         uploadFile(files[0]);
                     }
 
-                    
+
                 }
             });
             function uploadFile(file) {
