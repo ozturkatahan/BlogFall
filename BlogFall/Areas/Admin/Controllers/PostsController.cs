@@ -20,6 +20,7 @@ namespace BlogFall.Areas.Admin.Controllers
         [BreadCrumb("Yazılar")]
         public ActionResult Index()
         {
+            // todo: datatable orderby string int datetime
             return View(db.Posts.OrderByDescending(x => x.CreationTime).ToList());
         }
 
@@ -33,7 +34,7 @@ namespace BlogFall.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            db.Posts.Remove(post);
+            db.Posts.Remove(post);    
             db.SaveChanges();
 
             return Json(new { success = true });
